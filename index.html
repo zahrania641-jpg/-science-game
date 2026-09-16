@@ -1,193 +1,208 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لعبة علوم ثالث متوسط</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رواد الفضاء في المستقبل 🚀</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #dff6ff, #f5e6ff);
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-      color: #333;
-    }
-
-    .game {
-      max-width: 650px;
-      margin: 30px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 25px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    }
-
-    h1 {
-      color: #6b4eff;
-    }
-
-    #question {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 25px 0;
-    }
-
-    button {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      border: none;
-      border-radius: 15px;
-      background: #eee8ff;
-      font-size: 17px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #dcd0ff;
-    }
-
-    #next {
-      background: #6b4eff;
-      color: white;
-      display: none;
-    }
-
-    #result {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 20px;
-    }
-  </style>
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#080b2d,#32105c,#102b59);
+  color:white;
+  text-align:center;
+}
+.game{
+  max-width:650px;
+  margin:30px auto;
+  padding:25px;
+}
+h1{font-size:32px}
+.card{
+  background:rgba(255,255,255,.12);
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+#question{
+  font-size:22px;
+  margin:25px 0;
+}
+button{
+  width:100%;
+  padding:15px;
+  margin:9px 0;
+  border:0;
+  border-radius:15px;
+  font-size:17px;
+  cursor:pointer;
+}
+.answer{background:#eee;color:#222}
+.answer:hover{background:#d8caff}
+#next{
+  background:#7c4dff;
+  color:white;
+  display:none;
+}
+#result{
+  font-size:20px;
+  font-weight:bold;
+  min-height:30px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="game">
-    <h1>🔬 لعبة علوم ثالث متوسط 🧪</h1>
+<div class="game">
+  <h1>🚀 روّاد الفضاء في المستقبل 🌌</h1>
 
+  <div class="card">
     <p id="score">الدرجة: 0</p>
-
     <div id="question"></div>
-
     <div id="answers"></div>
-
     <p id="result"></p>
-
-    <button id="next" onclick="nextQuestion()">السؤال التالي ➜</button>
+    <button id="next" onclick="nextQuestion()">السؤال التالي 🚀</button>
   </div>
+</div>
 
 <script>
 
 const questions = [
-  {
-    question: "ما العملية التي تتكاثر بها البكتيريا غالبًا؟",
-    answers: ["التبرعم", "الانشطار الثنائي", "التجدد", "الدرنات"],
-    correct: 1
-  },
-  {
-    question: "ما الجهاز الذي يسجل الموجات الزلزالية؟",
-    answers: ["البارومتر", "الترمومتر", "السيزموجراف", "المجهر"],
-    correct: 2
-  },
-  {
-    question: "ما الوحدة الأساسية لبناء أجسام الكائنات الحية؟",
-    answers: ["الذرة", "الخلية", "النسيج", "العضو"],
-    correct: 1
-  },
-  {
-    question: "ماذا تسمى الصفات التي تنتقل من الآباء إلى الأبناء؟",
-    answers: ["الصفات الوراثية", "الصفات المكتسبة", "السلوكيات", "الاستجابات"],
-    correct: 0
-  },
-  {
-    question: "أي مما يلي يعد من مصادر الطاقة المتجددة؟",
-    answers: ["الفحم", "النفط", "الطاقة الشمسية", "الغاز الطبيعي"],
-    correct: 2
-  }
+
+{
+ question:"ما الهدف من إرسال روّاد الفضاء إلى الفضاء؟",
+ answers:[
+ "استكشاف الفضاء وإجراء الأبحاث",
+ "اللعب فقط",
+ "البحث عن الذهب فقط",
+ "مشاهدة الأرض من بعيد فقط"
+ ],
+ correct:0
+},
+
+{
+ question:"ما الذي يحتاجه رائد الفضاء للتنفس خارج المركبة؟",
+ answers:[
+ "ماء فقط",
+ "بدلة ونظام لتوفير الأكسجين",
+ "نظارات شمسية",
+ "مظلة"
+ ],
+ correct:1
+},
+
+{
+ question:"لماذا يصعب العيش على كوكب آخر؟",
+ answers:[
+ "لأن الكواكب لا تتحرك",
+ "بسبب اختلاف البيئة والهواء والحرارة والجاذبية",
+ "لأن الفضاء مظلم فقط",
+ "لأن النجوم قريبة"
+ ],
+ correct:1
+},
+
+{
+ question:"أي تقنية يمكن أن تساعد روّاد الفضاء في المستقبل؟",
+ answers:[
+ "الروبوتات والذكاء الاصطناعي",
+ "الورق فقط",
+ "الساعات الرملية",
+ "الشموع"
+ ],
+ correct:0
+},
+
+{
+ question:"ما الكوكب الذي يُدرس كثيرًا لاحتمال وجود مستوطنات بشرية مستقبلية؟",
+ answers:[
+ "المريخ",
+ "عطارد",
+ "المشتري",
+ "نبتون"
+ ],
+ correct:0
+},
+
+{
+ question:"ماذا يحدث لجسم الإنسان عند قضاء وقت طويل في بيئة قليلة الجاذبية؟",
+ answers:[
+ "لا يحدث أي تغيير",
+ "قد تضعف العضلات والعظام",
+ "يصبح الإنسان أطول فورًا",
+ "يتوقف القلب"
+ ],
+ correct:1
+}
+
 ];
 
-let currentQuestion = 0;
-let score = 0;
+let current=0;
+let score=0;
 
-function showQuestion() {
+function showQuestion(){
 
-  const q = questions[currentQuestion];
+ const q=questions[current];
 
-  document.getElementById("question").textContent = q.question;
+ document.getElementById("question").textContent=q.question;
 
-  const answersDiv = document.getElementById("answers");
-  answersDiv.innerHTML = "";
+ const box=document.getElementById("answers");
+ box.innerHTML="";
 
-  document.getElementById("result").textContent = "";
-  document.getElementById("next").style.display = "none";
+ document.getElementById("result").textContent="";
+ document.getElementById("next").style.display="none";
 
-  q.answers.forEach((answer, index) => {
+ q.answers.forEach((answer,index)=>{
 
-    const button = document.createElement("button");
+   const btn=document.createElement("button");
 
-    button.textContent = answer;
+   btn.className="answer";
+   btn.textContent=answer;
 
-    button.onclick = function() {
-      checkAnswer(index);
-    };
+   btn.onclick=()=>checkAnswer(index);
 
-    answersDiv.appendChild(button);
-  });
+   box.appendChild(btn);
+ });
 }
 
-function checkAnswer(selected) {
+function checkAnswer(choice){
 
-  const q = questions[currentQuestion];
-  const buttons = document.querySelectorAll("#answers button");
+ const q=questions[current];
+ const buttons=document.querySelectorAll(".answer");
 
-  buttons.forEach(button => {
-    button.disabled = true;
-  });
+ buttons.forEach(b=>b.disabled=true);
 
-  if (selected === q.correct) {
+ if(choice===q.correct){
+   score++;
+   document.getElementById("result").textContent="🎉 إجابة صحيحة!";
+ }else{
+   document.getElementById("result").textContent="❌ إجابة غير صحيحة";
+ }
 
-    score++;
+ document.getElementById("score").textContent="الدرجة: "+score;
 
-    document.getElementById("result").textContent =
-      "🎉 إجابة صحيحة! أحسنتِ";
-
-  } else {
-
-    document.getElementById("result").textContent =
-      "❌ إجابة غير صحيحة، حاولي في السؤال التالي";
-
-  }
-
-  document.getElementById("score").textContent =
-    "الدرجة: " + score;
-
-  document.getElementById("next").style.display = "block";
+ document.getElementById("next").style.display="block";
 }
 
-function nextQuestion() {
+function nextQuestion(){
 
-  currentQuestion++;
+ current++;
 
-  if (currentQuestion < questions.length) {
+ if(current<questions.length){
+   showQuestion();
+ }else{
 
-    showQuestion();
+   document.getElementById("question").textContent="🌟 انتهت الرحلة الفضائية!";
 
-  } else {
+   document.getElementById("answers").innerHTML="";
 
-    document.getElementById("question").textContent =
-      "🎊 انتهت اللعبة!";
+   document.getElementById("result").textContent=
+   "🚀 نتيجتك: "+score+" من "+questions.length;
 
-    document.getElementById("answers").innerHTML = "";
-
-    document.getElementById("result").textContent =
-      "نتيجتك: " + score + " من " + questions.length;
-
-    document.getElementById("next").style.display = "none";
-  }
+   document.getElementById("next").style.display="none";
+ }
 }
 
 showQuestion();
