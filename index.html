@@ -3,272 +3,582 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>رواد الفضاء في المستقبل 🚀</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#080b2d,#32105c,#102b59);
-  color:white;
-  text-align:center;
-}
-.game{
-  max-width:650px;
-  margin:30px auto;
-  padding:25px;
-}
-h1{font-size:32px}
-.card{
-  background:rgba(255,255,255,.12);
-  padding:25px;
-  border-radius:25px;
-  box-shadow:0 8px 30px rgba(0,0,0,.3);
-}
-#question{
-  font-size:22px;
-  margin:25px 0;
-}
-button{
-  width:100%;
-  padding:15px;
-  margin:9px 0;
-  border:0;
-  border-radius:15px;
-  font-size:17px;
-  cursor:pointer;
-}
-.answer{background:#eee;color:#222}
-.answer:hover{background:#d8caff}
-#next{
-  background:#7c4dff;
-  color:white;
-  display:none;
-}
-#result{
-  font-size:20px;
-  font-weight:bold;
-  min-height:30px;
-}
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #07152f, #101b45, #26134d);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .game {
+        width: 100%;
+        max-width: 650px;
+        background: rgba(10, 15, 40, 0.92);
+        border-radius: 25px;
+        padding: 25px;
+        box-shadow: 0 0 30px rgba(100, 130, 255, 0.25);
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+        font-size: 28px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #cbd5ff;
+        margin-bottom: 20px;
+    }
+
+    .progress {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #aebcff;
+        font-size: 15px;
+    }
+
+    .question {
+        background: rgba(255,255,255,0.08);
+        border-radius: 18px;
+        padding: 20px;
+        font-size: 20px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+    }
+
+    .answers button {
+        width: 100%;
+        border: none;
+        border-radius: 15px;
+        padding: 15px;
+        margin: 7px 0;
+        font-size: 17px;
+        cursor: pointer;
+        background: #202b5d;
+        color: white;
+        transition: 0.2s;
+    }
+
+    .answers button:hover {
+        background: #304184;
+        transform: scale(1.01);
+    }
+
+    .answers button:disabled {
+        cursor: default;
+    }
+
+    .correct {
+        background: #18794e !important;
+    }
+
+    .wrong {
+        background: #9b3030 !important;
+    }
+
+    .result {
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 15px;
+        line-height: 1.7;
+        display: none;
+    }
+
+    .result.correct-result {
+        background: rgba(24,121,78,0.25);
+        border: 1px solid #38d996;
+    }
+
+    .result.wrong-result {
+        background: rgba(155,48,48,0.25);
+        border: 1px solid #ff7777;
+    }
+
+    #next {
+        width: 100%;
+        border: none;
+        border-radius: 15px;
+        padding: 14px;
+        margin-top: 15px;
+        font-size: 18px;
+        cursor: pointer;
+        background: #6c63ff;
+        color: white;
+        display: none;
+    }
+
+    #next:hover {
+        background: #8179ff;
+    }
+
+    .score {
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 17px;
+    }
+
+    .final {
+        text-align: center;
+        display: none;
+    }
+
+    .final h2 {
+        font-size: 28px;
+    }
+
+    .restart {
+        border: none;
+        background: #6c63ff;
+        color: white;
+        padding: 14px 25px;
+        border-radius: 15px;
+        font-size: 17px;
+        cursor: pointer;
+    }
 </style>
 </head>
 
 <body>
 
 <div class="game">
-<h1>🚀 رواد الفضاء في المستقبل 🌌</h1>
 
-<div class="card">
-<p id="score">الدرجة: 0</p>
-<div id="question"></div>
-<div id="answers"></div>
-<p id="result"></p>
-<button id="next" onclick="nextQuestion()">السؤال التالي 🚀</button>
-</div>
+    <h1>🚀 رواد الفضاء في المستقبل</h1>
+
+    <div class="subtitle">
+        اختبر معلوماتك واستعد لمهمة فضائية مستقبلية 🌌
+    </div>
+
+    <div class="score">
+        النقاط: <span id="score">0</span>
+    </div>
+
+    <div id="quiz">
+
+        <div class="progress" id="progress"></div>
+
+        <div class="question" id="question"></div>
+
+        <div class="answers" id="answers"></div>
+
+        <div class="result" id="result"></div>
+
+        <button id="next" onclick="nextQuestion()">السؤال التالي 🚀</button>
+
+    </div>
+
+    <div class="final" id="final">
+        <h2>🎉 انتهت المهمة!</h2>
+        <p id="finalText"></p>
+        <button class="restart" onclick="restartGame()">إعادة اللعبة 🔄</button>
+    </div>
+
 </div>
 
 <script>
 
 const questions = [
 
-{
-question:"ما العامل الأكثر أهمية عند التخطيط لرحلة بشرية طويلة إلى المريخ؟",
-answers:["لون سطح المريخ","توفير الموارد والحماية من ظروف الفضاء","عدد الأقمار حول المريخ","شكل المركبة من الخارج"],
-correct:1
-},
+    {
+        question: "تخيل أن رواد الفضاء سيعيشون في محطة فضائية لمدة سنة كاملة، ولا يمكن إرسال ماء جديد لهم بسهولة. ما الحل الأكثر فائدة؟",
+        answers: [
+            "استخدام الماء مرة واحدة ثم التخلص منه",
+            "إعادة تدوير الماء وتنقيته لاستخدامه مرة أخرى",
+            "تقليل شرب الماء إلى أقل كمية ممكنة",
+            "تخزين الماء في مكان مفتوح داخل المحطة"
+        ],
+        correct: 1,
+        explanation: "إعادة تدوير الماء تقلل الحاجة إلى نقل كميات كبيرة من الماء من الأرض، وهذا مهم جدًا في الرحلات الطويلة."
+    },
 
-{
-question:"لماذا تحتاج الرحلات الفضائية المستقبلية إلى أنظمة لإعادة تدوير الماء؟",
-answers:["لتقليل وزن المركبة فقط","لأن الماء لا يتجمد في الفضاء","لتقليل الحاجة إلى حمل كميات جديدة من الماء","لزيادة سرعة المركبة"],
-correct:2
-},
+    {
+        question: "في مهمة مستقبلية إلى المريخ، حدث تأخر في وصول الرسائل بين الأرض والمريخ. ما التصرف الأنسب؟",
+        answers: [
+            "انتظار تعليمات الأرض في كل قرار صغير",
+            "إلغاء المهمة فورًا",
+            "استخدام أنظمة تساعد الرواد على اتخاذ بعض القرارات بأنفسهم",
+            "إيقاف جميع أجهزة المحطة حتى تصل الرسالة"
+        ],
+        correct: 2,
+        explanation: "بسبب بُعد المريخ، قد يستغرق التواصل وقتًا، لذلك تحتاج المهمة إلى أنظمة ورواد قادرين على التعامل مع بعض المواقف دون انتظار فوري."
+    },
 
-{
-question:"إذا عاش رواد الفضاء فترة طويلة في بيئة منخفضة الجاذبية، فما المشكلة التي قد تظهر؟",
-answers:["زيادة قوة العضلات تلقائيًا","ضعف العضلات والعظام","توقف التنفس نهائيًا","زيادة كثافة العظام"],
-correct:1
-},
+    {
+        question: "أثناء عاصفة غبارية على المريخ، انخفضت الطاقة التي تنتجها الألواح الشمسية. ما الأولوية؟",
+        answers: [
+            "تشغيل وسائل الترفيه أولًا",
+            "تشغيل أنظمة الحياة الأساسية مثل الأكسجين والتدفئة",
+            "استخدام الطاقة لتغيير شكل المبنى",
+            "إضاءة جميع أجزاء المحطة طوال الوقت"
+        ],
+        correct: 1,
+        explanation: "عند نقص الطاقة يجب إعطاء الأولوية للأنظمة الضرورية لبقاء الرواد مثل الأكسجين ودرجة الحرارة والاتصالات."
+    },
 
-{
-question:"ما الفائدة الأساسية من استخدام الروبوتات مع رواد الفضاء مستقبلًا؟",
-answers:["استبدال جميع العلماء","تنفيذ بعض المهام الخطرة أو المتكررة","منع إجراء التجارب","زيادة استهلاك الطاقة"],
-correct:1
-},
+    {
+        question: "لماذا قد يستخدم رواد الفضاء روبوتًا لاستكشاف منطقة قبل أن يذهبوا إليها بأنفسهم؟",
+        answers: [
+            "لتقليل تعرض الرواد للمخاطر غير المعروفة",
+            "لأن الروبوت يحتاج إلى النوم أقل",
+            "لأن الروبوت يستطيع التنفس في كل مكان",
+            "لجعل الرحلة أسرع فقط"
+        ],
+        correct: 0,
+        explanation: "يمكن للروبوت فحص المكان وجمع معلومات عن التضاريس والمخاطر قبل إرسال البشر إليه."
+    },
 
-{
-question:"لماذا تُعد حماية رواد الفضاء من الإشعاع مهمة في الرحلات البعيدة؟",
-answers:["لأن الإشعاع قد يؤثر في صحة الإنسان","لأنه يجعل المركبة أسرع","لأنه يمنع رؤية النجوم","لأنه يزيد الجاذبية"],
-correct:0
-},
+    {
+        question: "إذا كان على مركبة فضائية حمل كمية محدودة من الأشياء، فأي خيار يساعد على تقليل الحاجة إلى قطع غيار كثيرة؟",
+        answers: [
+            "حمل عدة أجهزة متطابقة دون سبب",
+            "استخدام طابعة ثلاثية الأبعاد لصنع بعض القطع عند الحاجة",
+            "ترك جميع قطع الغيار على الأرض",
+            "إصلاح الأجهزة باستخدام الطعام"
+        ],
+        correct: 1,
+        explanation: "الطباعة ثلاثية الأبعاد يمكن أن تساعد في تصنيع بعض القطع والأدوات داخل المهمة بدل حمل عدد كبير منها من الأرض."
+    },
 
-{
-question:"ما التحدي الذي يجعل التواصل بين الأرض ورواد الفضاء البعيدين مختلفًا؟",
-answers:["انعدام الأصوات في المركبة","وجود تأخير في وصول الإشارات","عدم وجود أجهزة اتصال","اختلاف لون الإشارات"],
-correct:1
-},
+    {
+        question: "لماذا يحتاج رواد الفضاء إلى ممارسة الرياضة أثناء الرحلات الطويلة؟",
+        answers: [
+            "للحفاظ على الجسم والعضلات والعظام قدر الإمكان",
+            "لزيادة سرعة المركبة",
+            "لتقليل كمية الأكسجين",
+            "لتغيير الجاذبية داخل المركبة"
+        ],
+        correct: 0,
+        explanation: "قلة الجاذبية لفترات طويلة تؤثر في العضلات والعظام، لذلك تساعد التمارين في تقليل بعض هذه التأثيرات."
+    },
 
-{
-question:"إذا تعطّل نظام مهم في مركبة فضائية بعيدة عن الأرض، لماذا تحتاج المركبة إلى أنظمة احتياطية؟",
-answers:["لتقليل مساحة المركبة","لضمان استمرار بعض الوظائف عند حدوث عطل","لزيادة عدد النوافذ","لجعل المركبة أكثر لمعانًا"],
-correct:1
-},
+    {
+        question: "لو حدث تسرب للهواء في جزء من محطة فضائية، ما التصرف الأكثر أهمية أولًا؟",
+        answers: [
+            "تشغيل الموسيقى لإبقاء الجميع هادئين",
+            "فتح جميع الأبواب بين الأقسام",
+            "تحديد مكان التسرب وعزل الجزء المتضرر",
+            "إطفاء أجهزة الاتصال بالأرض"
+        ],
+        correct: 2,
+        explanation: "عزل المنطقة المتضررة يساعد على تقليل فقدان الهواء ويحافظ على الضغط في بقية المحطة."
+    },
 
-{
-question:"ما الذي يجعل زراعة النباتات في الفضاء أكثر تحديًا من الأرض؟",
-answers:["اختلاف الجاذبية والبيئة المتاحة للنبات","لأن النباتات لا تحتاج إلى ضوء","لأن الماء لا يمكن استخدامه","لأن النباتات لا تحتوي على خلايا"],
-correct:0
-},
+    {
+        question: "يريد العلماء إنشاء مسكن مستقبلي على المريخ. لماذا قد يفضلون مكانًا يوفر حماية طبيعية أو مواد يمكن استخدامها كعازل؟",
+        answers: [
+            "لتقليل تعرض المسكن للإشعاع والظروف القاسية",
+            "لجعل لون المسكن أجمل",
+            "لزيادة جاذبية المريخ",
+            "لجعل اليوم على المريخ أطول"
+        ],
+        correct: 0,
+        explanation: "الحماية من الإشعاع والظروف البيئية القاسية مهمة في المهمات طويلة المدة، ويمكن لبعض المواد أو التضاريس أن تساعد في ذلك."
+    },
 
-{
-question:"أي خيار يمثل استخدامًا محتملًا للطباعة ثلاثية الأبعاد في المستقبل الفضائي؟",
-answers:["صناعة أدوات وقطع غيار عند الحاجة","إيقاف جميع التجارب","زيادة الجاذبية","إلغاء الحاجة إلى الطاقة"],
-correct:0
-},
+    {
+        question: "إذا أراد رواد الفضاء زراعة بعض النباتات داخل محطة مستقبلية، فما الفائدة الإضافية المحتملة؟",
+        answers: [
+            "يمكن أن تساعد النباتات في إنتاج الغذاء والمساهمة في دورة الغازات",
+            "ستجعل الجاذبية مثل الأرض",
+            "ستمنع الشمس من الوصول إلى المحطة",
+            "ستجعل المركبة تتحرك دون محرك"
+        ],
+        correct: 0,
+        explanation: "النباتات يمكن أن توفر جزءًا من الغذاء، كما تدخل في تبادل الغازات داخل أنظمة الحياة، لذلك قد تكون مفيدة في الرحلات الطويلة."
+    },
 
-{
-question:"لماذا تُعد مصادر الطاقة المستمرة مهمة للمستوطنات الفضائية المستقبلية؟",
-answers:["لتشغيل أنظمة الحياة والمعدات والأجهزة","لتغيير مدار الكواكب","لإيقاف أشعة الشمس","لزيادة حجم الكواكب"],
-correct:0
-},
+    {
+        question: "وجد فريق فضائي أن أحد الأجهزة المهمة يمكن أن يتعطل بسهولة. ما التصرف الأفضل عند التخطيط للمهمة؟",
+        answers: [
+            "الاعتماد عليه وحده",
+            "إلغاء جميع الأجهزة الأخرى",
+            "توفير نظام احتياطي أو طريقة بديلة للتعامل مع العطل",
+            "عدم إخبار الفريق بالمشكلة"
+        ],
+        correct: 2,
+        explanation: "وجود بديل أو نظام احتياطي يقلل تأثير تعطل جهاز مهم، وهذا جزء أساسي من التخطيط للمهمات الفضائية."
+    },
 
-{
-question:"ما الذي يجعل المريخ مناسبًا للدراسة كموقع محتمل للاستيطان؟",
-answers:["وجود سطح صلب يمكن استكشافه","عدم وجود غلاف جوي إطلاقًا","كونه أكبر من الشمس","عدم وجود أي تغير في الحرارة"],
-correct:0
-},
+    {
+        question: "لماذا يجب أن تكون بدلات رواد الفضاء مصممة بعناية عند العمل خارج المركبة؟",
+        answers: [
+            "لأنها تحميهم وتوفر لهم بيئة مناسبة أثناء وجودهم خارج المركبة",
+            "لأنها تجعلهم يطيرون أسرع",
+            "لأنها تزيد جاذبية الكوكب",
+            "لأنها تمنع المركبة من الحركة"
+        ],
+        correct: 0,
+        explanation: "بدلة الفضاء تساعد على حماية الجسم وتوفير الضغط والغازات والاتصال والحماية من البيئة الفضائية."
+    },
 
-{
-question:"إذا أراد العلماء تقليل كمية المؤن التي تحملها المركبة، فما الحل الأكثر منطقية؟",
-answers:["زيادة عدد الركاب","إعادة تدوير الموارد وإنتاج بعض الاحتياجات محليًا","التخلص من أنظمة المياه","تقليل الأكسجين"],
-correct:1
-},
+    {
+        question: "تخيل أن الرواد لديهم كمية محدودة من الطاقة في يوم معين. أي قرار منطقي؟",
+        answers: [
+            "استخدام الطاقة على الأنظمة الضرورية أولًا",
+            "تشغيل كل الأجهزة في الوقت نفسه",
+            "استخدام الطاقة للترفيه قبل أنظمة الحياة",
+            "ترك البطاريات تعمل حتى تنفد"
+        ],
+        correct: 0,
+        explanation: "إدارة الطاقة مهمة جدًا، لذلك تعطى الأولوية للأنظمة التي يحتاجها الرواد للبقاء وتشغيل المهمة."
+    },
 
-{
-question:"ما الدور المحتمل للذكاء الاصطناعي في المهمات الفضائية المستقبلية؟",
-answers:["تحليل البيانات والمساعدة في اتخاذ القرارات","إلغاء الحاجة إلى جميع العلماء","إيقاف المركبة دائمًا","منع إرسال البيانات إلى الأرض"],
-correct:0
-},
+    {
+        question: "إذا اكتشف الرواد أن منطقة قريبة من موقع الهبوط مليئة بصخور وعوائق، ماذا يمكن أن يفعلوا قبل إرسال أحدهم لاستكشافها؟",
+        answers: [
+            "إرسال روبوت أو استخدام أجهزة استشعار لفحص المنطقة",
+            "الذهاب إليها مباشرة دون معلومات",
+            "إزالة جميع الصخور يدويًا",
+            "تجاهل المنطقة دون فحص"
+        ],
+        correct: 0,
+        explanation: "الاستطلاع المسبق باستخدام الروبوتات أو أجهزة الاستشعار يساعد الفريق على معرفة طبيعة المنطقة وتقليل المخاطر."
+    },
 
-{
-question:"لماذا يحتاج رائد الفضاء إلى بدلة خاصة عند الخروج من المركبة؟",
-answers:["للحفاظ على ظروف مناسبة للتنفس والضغط والحماية","لزيادة سرعة المشي","لتغيير لون الجسم","لزيادة الجاذبية"],
-correct:0
-},
+    {
+        question: "في رحلة طويلة جدًا، لماذا يحتاج رواد الفضاء إلى التخطيط الجيد للنوم والراحة؟",
+        answers: [
+            "للمحافظة على قدرتهم على التركيز وأداء مهامهم",
+            "لزيادة سرعة المركبة",
+            "لتقليل المسافة بين الكواكب",
+            "لإنتاج المزيد من الأكسجين"
+        ],
+        correct: 0,
+        explanation: "الراحة المنتظمة تساعد الرواد على الحفاظ على التركيز والقدرة على تنفيذ المهام خلال الرحلات الطويلة."
+    },
 
-{
-question:"أي مشكلة تصبح أكثر أهمية كلما زادت مدة الرحلة الفضائية؟",
-answers:["توفير الغذاء والماء والطاقة لفترة أطول","اختيار لون المركبة","عدد النوافذ","حجم شعار المهمة"],
-correct:0
-},
+    {
+        question: "إذا كان من الممكن إصلاح جهاز داخل المحطة بدل إرساله من الأرض، فما الفائدة الأساسية؟",
+        answers: [
+            "تقليل الحاجة إلى انتظار شحنة جديدة من الأرض",
+            "زيادة جاذبية المحطة",
+            "إيقاف الإشعاع تمامًا",
+            "جعل اليوم أقصر"
+        ],
+        correct: 0,
+        explanation: "إمكانية الإصلاح أو تصنيع القطع محليًا تقلل الاعتماد على الإمدادات القادمة من الأرض."
+    },
 
-{
-question:"كيف يمكن للروبوتات أن تقلل المخاطر على رواد الفضاء؟",
-answers:["بإرسالها لتنفيذ بعض المهام الخطرة بدل الإنسان","بإيقاف جميع التجارب","بمنع التواصل مع الأرض","بزيادة وزن المركبة"],
-correct:0
-},
+    {
+        question: "لماذا تعتبر إعادة تدوير ثاني أكسيد الكربون والأكسجين مهمة في المحطات الفضائية المستقبلية؟",
+        answers: [
+            "للمساعدة في الحفاظ على غازات ضرورية للحياة داخل النظام",
+            "لتغيير لون السماء",
+            "لزيادة حجم المركبة",
+            "لتقليل سرعة المركبة"
+        ],
+        correct: 0,
+        explanation: "الحفاظ على توازن الغازات داخل المركبة جزء أساسي من أنظمة دعم الحياة، خصوصًا في المهمات الطويلة."
+    },
 
-{
-question:"لماذا تُجرى التجارب على الأرض قبل إرسال تقنيات جديدة إلى الفضاء؟",
-answers:["للتأكد من كفاءتها وسلامتها قبل استخدامها في مهمة حقيقية","لزيادة مدة الرحلة","لمنع استخدامها في الفضاء","لإلغاء الحاجة إلى التدريب"],
-correct:0
-},
+    {
+        question: "أراد العلماء اختيار موقع مناسب لبناء قاعدة مستقبلية. ما العامل الذي يجب أن يأخذوه في الحسبان؟",
+        answers: [
+            "توفر مصادر أو ظروف تساعد على بقاء الرواد وتشغيل القاعدة",
+            "أن يكون الموقع أجمل شكلًا فقط",
+            "أن يكون بعيدًا عن أي مصدر للطاقة",
+            "أن يكون المكان بلا أي معلومات سابقة عنه"
+        ],
+        correct: 0,
+        explanation: "اختيار الموقع يعتمد على عوامل علمية مثل الموارد والطاقة والحماية وطبيعة التضاريس، وليس الشكل فقط."
+    },
 
-{
-question:"ما المشكلة التي قد تواجه الإنسان إذا عاش فترة طويلة بعيدًا عن الأرض؟",
-answers:["التأثر بتغير الجاذبية والعزلة والظروف البيئية المختلفة","تحول جسمه إلى غاز","توقف نمو جميع الخلايا فورًا","اختفاء الحاجة إلى النوم"],
-correct:0
-},
+    {
+        question: "لو تعطّل نظام مهم في محطة فضائية، لماذا من المفيد أن يعرف الرواد كيفية تشغيل نظام بديل يدويًا؟",
+        answers: [
+            "لأن الأنظمة قد تتعطل، والبديل يساعد على استمرار المهمة",
+            "لأن الأجهزة الإلكترونية ممنوعة في الفضاء",
+            "لأن الرواد لا يحتاجون إلى التكنولوجيا",
+            "لأن ذلك يجعل الجاذبية أقوى"
+        ],
+        correct: 0,
+        explanation: "الاعتماد على أكثر من طريقة للتعامل مع المشكلة يزيد من قدرة الفريق على الاستمرار عند حدوث عطل."
+    },
 
-{
-question:"إذا أصبحت المستوطنات الفضائية ممكنة مستقبلًا، فما النظام الضروري لاستمرار حياة السكان؟",
-answers:["نظام يوفر الهواء والماء والغذاء والطاقة","نظام لتغيير لون الصخور","نظام لإيقاف دوران الكواكب","نظام لمنع وصول الضوء"],
-correct:0
-},
+    {
+        question: "تخيل أن فريقًا يريد إرسال مهمة إلى المريخ. أي شيء يجب التخطيط له قبل الرحلة بوقت طويل؟",
+        answers: [
+            "الغذاء والماء والطاقة والسكن والاتصالات والطوارئ",
+            "اختيار لون المركبة فقط",
+            "ماذا سيرتدي الرواد في أول صورة فقط",
+            "إلغاء خطط الطوارئ لتوفير المساحة"
+        ],
+        correct: 0,
+        explanation: "المهمة الفضائية تحتاج إلى التخطيط للموارد والحياة اليومية والطوارئ والاتصالات والطاقة، لأن المساعدة من الأرض ليست فورية."
+    },
 
-{
-question:"ما الفكرة التي تلخص الهدف من تطوير تقنيات رواد الفضاء مستقبلًا؟",
-answers:["زيادة قدرة الإنسان على الاستكشاف والعيش والعمل في بيئات فضائية مختلفة","إلغاء جميع الرحلات الفضائية","استبدال الأرض بالكواكب فورًا","منع استخدام الروبوتات"],
-correct:0
-}
+    {
+        question: "إذا نجحت مهمة مستقبلية في إنتاج بعض الماء والغذاء والأكسجين داخل كوكب آخر، فما الذي قد يعنيه ذلك للمهمات القادمة؟",
+        answers: [
+            "قد يقل اعتماد الرواد على نقل كل احتياجاتهم من الأرض",
+            "لن يحتاج الرواد إلى أي معدات بعد ذلك",
+            "لن يحتاجوا إلى التخطيط للمهمة",
+            "ستختفي الجاذبية تمامًا"
+        ],
+        correct: 0,
+        explanation: "إنتاج بعض الموارد محليًا يمكن أن يقلل كمية الإمدادات التي يجب نقلها من الأرض، مما قد يساعد على تنفيذ مهمات أطول."
+    }
 
 ];
 
-let current=0;
-let score=0;
+let current = 0;
+let score = 0;
 
-function showQuestion(){
+const questionElement = document.getElementById("question");
+const answersElement = document.getElementById("answers");
+const resultElement = document.getElementById("result");
+const nextButton = document.getElementById("next");
+const scoreElement = document.getElementById("score");
+const progressElement = document.getElementById("progress");
+const quizElement = document.getElementById("quiz");
+const finalElement = document.getElementById("final");
+const finalText = document.getElementById("finalText");
 
-const q=questions[current];
 
-document.getElementById("question").textContent=q.question;
+function showQuestion() {
 
-const box=document.getElementById("answers");
-box.innerHTML="";
+    const q = questions[current];
 
-document.getElementById("result").textContent="";
-document.getElementById("next").style.display="none";
+    questionElement.textContent = q.question;
 
-q.answers.forEach((answer,index)=>{
+    progressElement.textContent =
+        "السؤال " + (current + 1) + " من " + questions.length;
 
-const btn=document.createElement("button");
+    answersElement.innerHTML = "";
 
-btn.className="answer";
-btn.textContent=answer;
+    resultElement.style.display = "none";
+    nextButton.style.display = "none";
 
-btn.onclick=()=>checkAnswer(index);
+    q.answers.forEach((answer, index) => {
 
-box.appendChild(btn);
+        const button = document.createElement("button");
 
-});
+        button.textContent =
+            String.fromCharCode(1571 + index) + " - " + answer;
 
+        button.onclick = () => checkAnswer(index, button);
+
+        answersElement.appendChild(button);
+    });
 }
 
-function checkAnswer(choice){
 
-const q=questions[current];
-const buttons=document.querySelectorAll(".answer");
+function checkAnswer(selected, clickedButton) {
 
-buttons.forEach(b=>b.disabled=true);
+    const q = questions[current];
 
-if(choice===q.correct){
+    const buttons = answersElement.querySelectorAll("button");
 
-score++;
-document.getElementById("result").textContent="🎉 إجابة صحيحة!";
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
 
-}else{
+    if (selected === q.correct) {
 
-document.getElementById("result").textContent="❌ إجابة غير صحيحة";
+        clickedButton.classList.add("correct");
 
+        score++;
+
+        scoreElement.textContent = score;
+
+        resultElement.className = "result correct-result";
+
+        resultElement.innerHTML =
+            "✅ <strong>إجابة صحيحة!</strong><br>" +
+            q.explanation;
+
+    } else {
+
+        clickedButton.classList.add("wrong");
+
+        buttons[q.correct].classList.add("correct");
+
+        resultElement.className = "result wrong-result";
+
+        resultElement.innerHTML =
+            "❌ <strong>إجابة غير صحيحة.</strong><br><br>" +
+            "✅ <strong>الإجابة الصحيحة:</strong> " +
+            q.answers[q.correct] +
+            "<br><br>" +
+            "💡 <strong>السبب:</strong> " +
+            q.explanation;
+    }
+
+    resultElement.style.display = "block";
+
+    if (current < questions.length - 1) {
+        nextButton.style.display = "block";
+    } else {
+        nextButton.textContent = "عرض النتيجة 🏆";
+        nextButton.style.display = "block";
+    }
 }
 
-document.getElementById("score").textContent="الدرجة: "+score;
 
-document.getElementById("next").style.display="block";
+function nextQuestion() {
 
+    current++;
+
+    if (current < questions.length) {
+
+        nextButton.textContent = "السؤال التالي 🚀";
+
+        showQuestion();
+
+    } else {
+
+        quizElement.style.display = "none";
+        finalElement.style.display = "block";
+
+        let message = "";
+
+        if (score >= 18) {
+            message = "🌟 ممتاز! واضح أنك مستعدة لمهمة فضائية!";
+        } else if (score >= 14) {
+            message = "🚀 رائع! عندك معرفة جميلة بعالم الفضاء.";
+        } else if (score >= 10) {
+            message = "🌌 جيد جدًا! ومع بعض المراجعة بتصيرين أفضل.";
+        } else {
+            message = "🛰️ تجربة جميلة! جربي مرة ثانية وشوفي كم تقدرين تجيبين.";
+        }
+
+        finalText.innerHTML =
+            "حصلتِ على <strong>" +
+            score +
+            " / " +
+            questions.length +
+            "</strong><br><br>" +
+            message;
+    }
 }
 
-function nextQuestion(){
 
-current++;
+function restartGame() {
 
-if(current<questions.length){
+    current = 0;
+    score = 0;
 
-showQuestion();
+    scoreElement.textContent = "0";
 
-}else{
+    finalElement.style.display = "none";
+    quizElement.style.display = "block";
 
-document.getElementById("question").textContent="🌟 انتهت الرحلة الفضائية!";
-
-document.getElementById("answers").innerHTML="";
-
-document.getElementById("result").textContent=
-"🚀 نتيجتك: "+score+" من "+questions.length;
-
-document.getElementById("next").style.display="none";
-
+    showQuestion();
 }
 
-}
 
 showQuestion();
 
