@@ -56,15 +56,15 @@ button{
 <body>
 
 <div class="game">
-  <h1>🚀 روّاد الفضاء في المستقبل 🌌</h1>
+<h1>🚀 رواد الفضاء في المستقبل 🌌</h1>
 
-  <div class="card">
-    <p id="score">الدرجة: 0</p>
-    <div id="question"></div>
-    <div id="answers"></div>
-    <p id="result"></p>
-    <button id="next" onclick="nextQuestion()">السؤال التالي 🚀</button>
-  </div>
+<div class="card">
+<p id="score">الدرجة: 0</p>
+<div id="question"></div>
+<div id="answers"></div>
+<p id="result"></p>
+<button id="next" onclick="nextQuestion()">السؤال التالي 🚀</button>
+</div>
 </div>
 
 <script>
@@ -72,69 +72,123 @@ button{
 const questions = [
 
 {
- question:"ما الهدف من إرسال روّاد الفضاء إلى الفضاء؟",
- answers:[
- "استكشاف الفضاء وإجراء الأبحاث",
- "اللعب فقط",
- "البحث عن الذهب فقط",
- "مشاهدة الأرض من بعيد فقط"
- ],
- correct:0
+question:"ما العامل الأكثر أهمية عند التخطيط لرحلة بشرية طويلة إلى المريخ؟",
+answers:["لون سطح المريخ","توفير الموارد والحماية من ظروف الفضاء","عدد الأقمار حول المريخ","شكل المركبة من الخارج"],
+correct:1
 },
 
 {
- question:"ما الذي يحتاجه رائد الفضاء للتنفس خارج المركبة؟",
- answers:[
- "ماء فقط",
- "بدلة ونظام لتوفير الأكسجين",
- "نظارات شمسية",
- "مظلة"
- ],
- correct:1
+question:"لماذا تحتاج الرحلات الفضائية المستقبلية إلى أنظمة لإعادة تدوير الماء؟",
+answers:["لتقليل وزن المركبة فقط","لأن الماء لا يتجمد في الفضاء","لتقليل الحاجة إلى حمل كميات جديدة من الماء","لزيادة سرعة المركبة"],
+correct:2
 },
 
 {
- question:"لماذا يصعب العيش على كوكب آخر؟",
- answers:[
- "لأن الكواكب لا تتحرك",
- "بسبب اختلاف البيئة والهواء والحرارة والجاذبية",
- "لأن الفضاء مظلم فقط",
- "لأن النجوم قريبة"
- ],
- correct:1
+question:"إذا عاش رواد الفضاء فترة طويلة في بيئة منخفضة الجاذبية، فما المشكلة التي قد تظهر؟",
+answers:["زيادة قوة العضلات تلقائيًا","ضعف العضلات والعظام","توقف التنفس نهائيًا","زيادة كثافة العظام"],
+correct:1
 },
 
 {
- question:"أي تقنية يمكن أن تساعد روّاد الفضاء في المستقبل؟",
- answers:[
- "الروبوتات والذكاء الاصطناعي",
- "الورق فقط",
- "الساعات الرملية",
- "الشموع"
- ],
- correct:0
+question:"ما الفائدة الأساسية من استخدام الروبوتات مع رواد الفضاء مستقبلًا؟",
+answers:["استبدال جميع العلماء","تنفيذ بعض المهام الخطرة أو المتكررة","منع إجراء التجارب","زيادة استهلاك الطاقة"],
+correct:1
 },
 
 {
- question:"ما الكوكب الذي يُدرس كثيرًا لاحتمال وجود مستوطنات بشرية مستقبلية؟",
- answers:[
- "المريخ",
- "عطارد",
- "المشتري",
- "نبتون"
- ],
- correct:0
+question:"لماذا تُعد حماية رواد الفضاء من الإشعاع مهمة في الرحلات البعيدة؟",
+answers:["لأن الإشعاع قد يؤثر في صحة الإنسان","لأنه يجعل المركبة أسرع","لأنه يمنع رؤية النجوم","لأنه يزيد الجاذبية"],
+correct:0
 },
 
 {
- question:"ماذا يحدث لجسم الإنسان عند قضاء وقت طويل في بيئة قليلة الجاذبية؟",
- answers:[
- "لا يحدث أي تغيير",
- "قد تضعف العضلات والعظام",
- "يصبح الإنسان أطول فورًا",
- "يتوقف القلب"
- ],
- correct:1
+question:"ما التحدي الذي يجعل التواصل بين الأرض ورواد الفضاء البعيدين مختلفًا؟",
+answers:["انعدام الأصوات في المركبة","وجود تأخير في وصول الإشارات","عدم وجود أجهزة اتصال","اختلاف لون الإشارات"],
+correct:1
+},
+
+{
+question:"إذا تعطّل نظام مهم في مركبة فضائية بعيدة عن الأرض، لماذا تحتاج المركبة إلى أنظمة احتياطية؟",
+answers:["لتقليل مساحة المركبة","لضمان استمرار بعض الوظائف عند حدوث عطل","لزيادة عدد النوافذ","لجعل المركبة أكثر لمعانًا"],
+correct:1
+},
+
+{
+question:"ما الذي يجعل زراعة النباتات في الفضاء أكثر تحديًا من الأرض؟",
+answers:["اختلاف الجاذبية والبيئة المتاحة للنبات","لأن النباتات لا تحتاج إلى ضوء","لأن الماء لا يمكن استخدامه","لأن النباتات لا تحتوي على خلايا"],
+correct:0
+},
+
+{
+question:"أي خيار يمثل استخدامًا محتملًا للطباعة ثلاثية الأبعاد في المستقبل الفضائي؟",
+answers:["صناعة أدوات وقطع غيار عند الحاجة","إيقاف جميع التجارب","زيادة الجاذبية","إلغاء الحاجة إلى الطاقة"],
+correct:0
+},
+
+{
+question:"لماذا تُعد مصادر الطاقة المستمرة مهمة للمستوطنات الفضائية المستقبلية؟",
+answers:["لتشغيل أنظمة الحياة والمعدات والأجهزة","لتغيير مدار الكواكب","لإيقاف أشعة الشمس","لزيادة حجم الكواكب"],
+correct:0
+},
+
+{
+question:"ما الذي يجعل المريخ مناسبًا للدراسة كموقع محتمل للاستيطان؟",
+answers:["وجود سطح صلب يمكن استكشافه","عدم وجود غلاف جوي إطلاقًا","كونه أكبر من الشمس","عدم وجود أي تغير في الحرارة"],
+correct:0
+},
+
+{
+question:"إذا أراد العلماء تقليل كمية المؤن التي تحملها المركبة، فما الحل الأكثر منطقية؟",
+answers:["زيادة عدد الركاب","إعادة تدوير الموارد وإنتاج بعض الاحتياجات محليًا","التخلص من أنظمة المياه","تقليل الأكسجين"],
+correct:1
+},
+
+{
+question:"ما الدور المحتمل للذكاء الاصطناعي في المهمات الفضائية المستقبلية؟",
+answers:["تحليل البيانات والمساعدة في اتخاذ القرارات","إلغاء الحاجة إلى جميع العلماء","إيقاف المركبة دائمًا","منع إرسال البيانات إلى الأرض"],
+correct:0
+},
+
+{
+question:"لماذا يحتاج رائد الفضاء إلى بدلة خاصة عند الخروج من المركبة؟",
+answers:["للحفاظ على ظروف مناسبة للتنفس والضغط والحماية","لزيادة سرعة المشي","لتغيير لون الجسم","لزيادة الجاذبية"],
+correct:0
+},
+
+{
+question:"أي مشكلة تصبح أكثر أهمية كلما زادت مدة الرحلة الفضائية؟",
+answers:["توفير الغذاء والماء والطاقة لفترة أطول","اختيار لون المركبة","عدد النوافذ","حجم شعار المهمة"],
+correct:0
+},
+
+{
+question:"كيف يمكن للروبوتات أن تقلل المخاطر على رواد الفضاء؟",
+answers:["بإرسالها لتنفيذ بعض المهام الخطرة بدل الإنسان","بإيقاف جميع التجارب","بمنع التواصل مع الأرض","بزيادة وزن المركبة"],
+correct:0
+},
+
+{
+question:"لماذا تُجرى التجارب على الأرض قبل إرسال تقنيات جديدة إلى الفضاء؟",
+answers:["للتأكد من كفاءتها وسلامتها قبل استخدامها في مهمة حقيقية","لزيادة مدة الرحلة","لمنع استخدامها في الفضاء","لإلغاء الحاجة إلى التدريب"],
+correct:0
+},
+
+{
+question:"ما المشكلة التي قد تواجه الإنسان إذا عاش فترة طويلة بعيدًا عن الأرض؟",
+answers:["التأثر بتغير الجاذبية والعزلة والظروف البيئية المختلفة","تحول جسمه إلى غاز","توقف نمو جميع الخلايا فورًا","اختفاء الحاجة إلى النوم"],
+correct:0
+},
+
+{
+question:"إذا أصبحت المستوطنات الفضائية ممكنة مستقبلًا، فما النظام الضروري لاستمرار حياة السكان؟",
+answers:["نظام يوفر الهواء والماء والغذاء والطاقة","نظام لتغيير لون الصخور","نظام لإيقاف دوران الكواكب","نظام لمنع وصول الضوء"],
+correct:0
+},
+
+{
+question:"ما الفكرة التي تلخص الهدف من تطوير تقنيات رواد الفضاء مستقبلًا؟",
+answers:["زيادة قدرة الإنسان على الاستكشاف والعيش والعمل في بيئات فضائية مختلفة","إلغاء جميع الرحلات الفضائية","استبدال الأرض بالكواكب فورًا","منع استخدام الروبوتات"],
+correct:0
 }
 
 ];
@@ -144,65 +198,76 @@ let score=0;
 
 function showQuestion(){
 
- const q=questions[current];
+const q=questions[current];
 
- document.getElementById("question").textContent=q.question;
+document.getElementById("question").textContent=q.question;
 
- const box=document.getElementById("answers");
- box.innerHTML="";
+const box=document.getElementById("answers");
+box.innerHTML="";
 
- document.getElementById("result").textContent="";
- document.getElementById("next").style.display="none";
+document.getElementById("result").textContent="";
+document.getElementById("next").style.display="none";
 
- q.answers.forEach((answer,index)=>{
+q.answers.forEach((answer,index)=>{
 
-   const btn=document.createElement("button");
+const btn=document.createElement("button");
 
-   btn.className="answer";
-   btn.textContent=answer;
+btn.className="answer";
+btn.textContent=answer;
 
-   btn.onclick=()=>checkAnswer(index);
+btn.onclick=()=>checkAnswer(index);
 
-   box.appendChild(btn);
- });
+box.appendChild(btn);
+
+});
+
 }
 
 function checkAnswer(choice){
 
- const q=questions[current];
- const buttons=document.querySelectorAll(".answer");
+const q=questions[current];
+const buttons=document.querySelectorAll(".answer");
 
- buttons.forEach(b=>b.disabled=true);
+buttons.forEach(b=>b.disabled=true);
 
- if(choice===q.correct){
-   score++;
-   document.getElementById("result").textContent="🎉 إجابة صحيحة!";
- }else{
-   document.getElementById("result").textContent="❌ إجابة غير صحيحة";
- }
+if(choice===q.correct){
 
- document.getElementById("score").textContent="الدرجة: "+score;
+score++;
+document.getElementById("result").textContent="🎉 إجابة صحيحة!";
 
- document.getElementById("next").style.display="block";
+}else{
+
+document.getElementById("result").textContent="❌ إجابة غير صحيحة";
+
+}
+
+document.getElementById("score").textContent="الدرجة: "+score;
+
+document.getElementById("next").style.display="block";
+
 }
 
 function nextQuestion(){
 
- current++;
+current++;
 
- if(current<questions.length){
-   showQuestion();
- }else{
+if(current<questions.length){
 
-   document.getElementById("question").textContent="🌟 انتهت الرحلة الفضائية!";
+showQuestion();
 
-   document.getElementById("answers").innerHTML="";
+}else{
 
-   document.getElementById("result").textContent=
-   "🚀 نتيجتك: "+score+" من "+questions.length;
+document.getElementById("question").textContent="🌟 انتهت الرحلة الفضائية!";
 
-   document.getElementById("next").style.display="none";
- }
+document.getElementById("answers").innerHTML="";
+
+document.getElementById("result").textContent=
+"🚀 نتيجتك: "+score+" من "+questions.length;
+
+document.getElementById("next").style.display="none";
+
+}
+
 }
 
 showQuestion();
