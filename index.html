@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لعبة علوم ثالث متوسط</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #dff6ff, #f5e6ff);
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .game {
+      max-width: 650px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      color: #6b4eff;
+    }
+
+    #question {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 25px 0;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 15px;
+      background: #eee8ff;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #dcd0ff;
+    }
+
+    #next {
+      background: #6b4eff;
+      color: white;
+      display: none;
+    }
+
+    #result {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="game">
+    <h1>🔬 لعبة علوم ثالث متوسط 🧪</h1>
+
+    <p id="score">الدرجة: 0</p>
+
+    <div id="question"></div>
+
+    <div id="answers"></div>
+
+    <p id="result"></p>
+
+    <button id="next" onclick="nextQuestion()">السؤال التالي ➜</button>
+  </div>
+
+<script>
+
+const questions = [
+  {
+    question: "ما العملية التي تتكاثر بها البكتيريا غالبًا؟",
+    answers: ["التبرعم", "الانشطار الثنائي", "التجدد", "الدرنات"],
+    correct: 1
+  },
+  {
+    question: "ما الجهاز الذي يسجل الموجات الزلزالية؟",
+    answers: ["البارومتر", "الترمومتر", "السيزموجراف", "المجهر"],
+    correct: 2
+  },
+  {
+    question: "ما الوحدة الأساسية لبناء أجسام الكائنات الحية؟",
+    answers: ["الذرة", "الخلية", "النسيج", "العضو"],
+    correct: 1
+  },
+  {
+    question: "ماذا تسمى الصفات التي تنتقل من الآباء إلى الأبناء؟",
+    answers: ["الصفات الوراثية", "الصفات المكتسبة", "السلوكيات", "الاستجابات"],
+    correct: 0
+  },
+  {
+    question: "أي مما يلي يعد من مصادر الطاقة المتجددة؟",
+    answers: ["الفحم", "النفط", "الطاقة الشمسية", "الغاز الطبيعي"],
+    correct: 2
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("question").textContent = q.question;
+
+  const answersDiv = document.getElementById("answers");
+  answersDiv.innerHTML = "";
+
+  document.getElementById("result").textContent = "";
+  document.getElementById("next").style.display = "none";
+
+  q.answers.forEach((answer, index) => {
+
+    const button = document.createElement("button");
+
+    button.textContent = answer;
+
+    button.onclick = function() {
+      checkAnswer(index);
+    };
+
+    answersDiv.appendChild(button);
+  });
+}
+
+function checkAnswer(selected) {
+
+  const q = questions[currentQuestion];
+  const buttons = document.querySelectorAll("#answers button");
+
+  buttons.forEach(button => {
+    button.disabled = true;
+  });
+
+  if (selected === q.correct) {
+
+    score++;
+
+    document.getElementById("result").textContent =
+      "🎉 إجابة صحيحة! أحسنتِ";
+
+  } else {
+
+    document.getElementById("result").textContent =
+      "❌ إجابة غير صحيحة، حاولي في السؤال التالي";
+
+  }
+
+  document.getElementById("score").textContent =
+    "الدرجة: " + score;
+
+  document.getElementById("next").style.display = "block";
+}
+
+function nextQuestion() {
+
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+
+    showQuestion();
+
+  } else {
+
+    document.getElementById("question").textContent =
+      "🎊 انتهت اللعبة!";
+
+    document.getElementById("answers").innerHTML = "";
+
+    document.getElementById("result").textContent =
+      "نتيجتك: " + score + " من " + questions.length;
+
+    document.getElementById("next").style.display = "none";
+  }
+}
+
+showQuestion();
+
+</script>
+
+</body>
+</html>
